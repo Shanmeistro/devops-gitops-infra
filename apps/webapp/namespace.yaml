@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: webapp-ns
+  labels:
+    name: webapp-ns
+    app: webapp
+    managed-by: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"

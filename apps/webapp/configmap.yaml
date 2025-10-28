@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webapp-config
+  labels:
+    app: webapp
+    version: v1
+    component: backend
+data:
+  # Application configuration
+  ENVIRONMENT: "production"
+  DEBUG: "false"
+  PORT: "8080"
+  
+  # Logging configuration
+  LOG_LEVEL: "INFO"
+  LOG_FORMAT: "json"
+  
+  # Health check configuration
+  HEALTH_CHECK_INTERVAL: "30"
+  READINESS_CHECK_INTERVAL: "5"
+  
+  # Metrics configuration
+  METRICS_ENABLED: "true"
+  METRICS_PATH: "/metrics"
+  
+  # Application metadata
+  APP_NAME: "DevOps GitOps Demo App"
+  APP_DESCRIPTION: "Flask application for DevOps GitOps demonstration"

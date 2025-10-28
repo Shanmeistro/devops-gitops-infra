@@ -1,0 +1,8 @@
+devops-gitops-infra/
+├── apps/
+│   └── webapp/
+│       ├── deployment.yaml
+│       ├── service.yaml
+│       ├── kustomization.yaml
+│       └── ingress.yaml  # optional, if using ingress
+└── argo-app.yaml
