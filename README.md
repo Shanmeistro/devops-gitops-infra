@@ -223,21 +223,21 @@ For more details, see [kube-prometheus-stack documentation](https://github.com/p
 ### Expected Outcome if configured correctly
 
 Webapp UI:
-![Webapp UI](webapp-ui.png)
+![Webapp UI](screenshots/webapp-ui.png)
 
 ArgoCD UI:
-![ArgoCD UI](argocd-ui.png)
+![ArgoCD UI](screenshots/argocd-ui.png)
 
 Webapp Metrics with Grafana and Prometheus:
-![Grafana and Prometheus Dashboard](grafana+prometheus-dashboard.png)
+![Grafana and Prometheus Dashboard](screenshots/dashboard.png)
 
 ### Confirm ArgoCD, ingress, webapp, and monitoring services are running
 
 Services Status:
-![Services Status](services-status.png)
+![Services Status](screenshots/services-status.png)
 
 Pod Logs for webapp:
-![logs](logs.png)
+![logs](screenshots/logs.png)
 
 ### Hosts File (WSL 2)
 
