@@ -77,17 +77,21 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 kubectl apply -f argo-app.yaml
 
 # Access ArgoCD UI
-kubectl port-forward svc/argocd-server -n argocd 8080:443
-# Visit: https://localhost:8080 (username: admin, password from step 2)
+kubectl port-forward svc/argocd-server -n argocd 8081:443
+# Visit: https://localhost:8081 (username: admin, password from step 2)
+
+> **Note:** ArgoCD UI and the webapp cannot both run on port 8080. Use port 8081 for both to avoid conflicts.
 ```
 
 ### 4. Access the Application
 
 ```bash
 # Via port-forward
-kubectl port-forward svc/webapp 3000:80
+kubectl port-forward svc/webapp 8081:80
 
-# Visit: http://localhost:3000
+# Visit: http://localhost:8081
+
+> **Note:** Ensure you are not running ArgoCD UI and the webapp on the same port.
 ```
 
 ## Kubernetes Manifests Details
@@ -216,6 +220,35 @@ For more details, see [kube-prometheus-stack documentation](https://github.com/p
 
 ## Troubleshooting
 
+### Example Screenshots
+
+Webapp UI:
+![Webapp UI](webapp-ui.png)
+
+ArgoCD UI:
+![ArgoCD UI](argocd-ui.png)
+
+Troubleshooting Example:
+![Troubleshooting Example](troubleshooting-example.png)
+
+### Hosts File (WSL 2)
+
+If running on WSL 2, update your hosts file in both Windows and WSL environments:
+
+```
+127.0.0.1 webapp.local
+```
+
+### Browser Compatibility
+
+ArgoCD UI and the webapp are recommended for Chromium-based browsers (e.g., Brave) to avoid security certificate issues. Firefox may require strict permissions when running both interfaces.
+
+### Debugging Tips
+
+- Include screenshots of errors or browser issues when reporting problems.
+- Check browser console for certificate warnings.
+- Use `kubectl describe` and `kubectl logs` for deeper diagnostics.
+
 ### Common Issues
 
 1. **Pod Not Starting**:
@@ -274,3 +307,5 @@ kubectl get applications -n argocd
 ## Support
 
 For detailed setup instructions and troubleshooting, see [kubernetes-setup.md](kubernetes-setup.md).
+
+See [CHANGELOG.md](CHANGELOG.md) for version history and updates.

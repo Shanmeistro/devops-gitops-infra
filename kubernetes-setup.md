@@ -113,15 +113,17 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 
 #### For kind cluster:
 ```bash
-kubectl port-forward svc/argocd-server -n argocd 8080:443
+kubectl port-forward svc/argocd-server -n argocd 8081:443
 ```
 
 #### For k3d cluster:
 ```bash
-kubectl port-forward svc/argocd-server -n argocd 8080:443
+kubectl port-forward svc/argocd-server -n argocd 8081:443
 ```
 
-Then access: https://localhost:8080 (accept the self-signed certificate)
+Then access: https://localhost:8081 (accept the self-signed certificate)
+
+> **Note:** ArgoCD UI and the webapp cannot both run on port 8080. Use port 8081 for both to avoid conflicts.
 
 Login with:
 - Username: `admin`
@@ -179,12 +181,15 @@ kubectl get ingress -n default
 
 #### Via port-forward:
 ```bash
-kubectl port-forward svc/webapp 3000:80
+kubectl port-forward svc/webapp 8081:80
 ```
-Then access: http://localhost:3000
+Then access: http://localhost:8081
+
+> **Note:** Ensure you are not running ArgoCD UI and the webapp on the same port.
 
 #### Via ingress (if configured):
-Add to your `/etc/hosts`:
+
+If running on WSL 2, update your hosts file in both Windows and WSL environments:
 ```
 127.0.0.1 webapp.local
 ```
@@ -234,6 +239,16 @@ k3d cluster delete webapp-cluster
 ```
 
 ## Troubleshooting
+
+### Browser Compatibility
+
+ArgoCD UI and the webapp are recommended for Chromium-based browsers (e.g., Brave) to avoid security certificate issues. Firefox may require strict permissions when running both interfaces.
+
+### Debugging Tips
+
+- Include screenshots of errors or browser issues when reporting problems.
+- Check browser console for certificate warnings.
+- Use `kubectl describe` and `kubectl logs` for deeper diagnostics.
 
 ### Common issues:
 
