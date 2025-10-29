@@ -173,6 +173,47 @@ kubectl logs -f deployment/webapp
 kubectl logs -f -l app=webapp
 ```
 
+---
+
+### Monitoring Setup: Prometheus & Grafana
+
+#### 1. Install Helm
+
+Helm is required for deploying monitoring tools. Install Helm on Linux:
+```bash
+curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+```
+
+#### 2. Deploy Prometheus & Grafana
+
+Add the Helm repo and install the kube-prometheus-stack:
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install monitoring prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace
+```
+
+#### 3. Access Grafana
+
+Get the Grafana admin password:
+```bash
+kubectl --namespace monitoring get secrets monitoring-grafana -o jsonpath="{.data.admin-password}" | base64 -d ; echo
+```
+
+Port-forward Grafana to your local machine:
+```bash
+export POD_NAME=$(kubectl --namespace monitoring get pod -l "app.kubernetes.io/name=grafana,app.kubernetes.io/instance=monitoring" -oname)
+kubectl --namespace monitoring port-forward $POD_NAME 3000
+```
+
+Open Grafana at [http://localhost:3000](http://localhost:3000) and log in with username `admin` and the password from above.
+
+#### 4. Import Dashboards & Configure Alerts
+
+Grafana is preconfigured to use Prometheus as a data source. You can import dashboards for Kubernetes and application monitoring, and set up alerting rules in Prometheus as needed.
+
+For more details, see [kube-prometheus-stack documentation](https://github.com/prometheus-operator/kube-prometheus).
+
 ## Troubleshooting
 
 ### Common Issues
