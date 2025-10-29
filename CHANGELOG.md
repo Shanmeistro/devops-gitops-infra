@@ -1,4 +1,4 @@
-# Changelog
+# 📜 Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -8,6 +8,27 @@ All notable changes to this project will be documented in this file.
 - Added instructions for including screenshots in troubleshooting.
 - Added initial screenshots to documentation.
 
+### Changed
+- Improved documentation structure and clarity.
+
+### Fixed
+- Addressed documentation gaps for port conflicts and browser issues.
+
+### Removed
+- (none)
+
 ## [v0.0.1] - 2025-10-29
 ### Added
 - Initial release of production-ready Kubernetes manifests and ArgoCD configuration for Flask webapp.
+
+### Changed
+- (none)
+
+### Fixed
+- (none)
+
+### Removed
+- (none)
+
+<!-- Compare links (update commit hashes as needed) -->
+[Compare v0.0.2...v0.0.1](https://github.com/Shanmeistro/devops-gitops-infra/compare/v0.0.1...v0.0.2)
